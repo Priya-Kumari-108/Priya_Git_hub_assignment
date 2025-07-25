@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, render_template_string
 import json
 
 app = Flask(__name__)
@@ -7,14 +7,12 @@ app = Flask(__name__)
 def home():
     return "Welcome to the API!"
 
-@app.route('/api', methods=['GET'])
-def api():
-    try:
-        with open('data.json', 'r') as file:
-            data = json.load(file)
-        return jsonify(data)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+# Route to serve the To-Do HTML form
+@app.route('/todo', methods=['GET'])
+def todo_form():
+    with open('To_Do_Page/To_Do_Form.html', 'r') as file:
+        html_content = file.read()
+    return render_template_string(html_content)
 
 if __name__ == '__main__':
     app.run(debug=True)
