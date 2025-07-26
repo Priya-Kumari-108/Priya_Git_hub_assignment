@@ -1,3 +1,6 @@
 flask
 pymongo
+
 dotenv
+Flask==2.3.3
+

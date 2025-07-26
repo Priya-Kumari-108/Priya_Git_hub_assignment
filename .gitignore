@@ -1,1 +1,5 @@
 venv/
+master_
+__pycache__/
+*.pyc
+.env
