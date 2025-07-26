@@ -1,9 +1,7 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, render_template_string
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
-from flask import Flask, jsonify, request, render_template_string
-import json
 
 # Load environment variables from .env
 load_dotenv()
@@ -25,7 +23,9 @@ def home():
 
 @app.route('/todo', methods=['GET'])
 def todo_form():
-    return render_template('To_Do_Form.html')
+    with open('To_Do_Page/To_Do_Form.html', 'r') as file:
+        html_content = file.read()
+    return render_template_string(html_content)
 
 @app.route('/submittodoitem', methods=['POST'])
 def submit_todo():
