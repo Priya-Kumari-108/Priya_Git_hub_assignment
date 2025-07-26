@@ -31,6 +31,9 @@ def todo_form():
 def submit_todo():
     item_name = request.form.get('itemName')
     item_description = request.form.get('itemDescription')
+    item_id = request.form.get('itemId')
+    item_uuid = request.form.get('ItemUUID')
+    item_hash = request.form.get('itemHash')
 
     if not item_name or not item_description:
         return "Both name and description are required!", 400
@@ -38,7 +41,10 @@ def submit_todo():
     # Insert item into MongoDB
     collection.insert_one({
         "itemName": item_name,
-        "itemDescription": item_description
+        "itemDescription": item_description,
+        "itemId": item_id,
+        "itemUUID": item_uuid,
+        "itemHash": item_hash
     })
     return "Item submitted successfully!", 200
 
